@@ -1,7 +1,7 @@
 import dependencias.*
 import rodados.*
 
-describe "Test de Dependencias" {
+describe "Test de Dependencias: Etapa 1" {
 	
 	const deportes = new Dependencia(cantEmpleados = 45)
 	const cultura = new Dependencia(cantEmpleados = 31)

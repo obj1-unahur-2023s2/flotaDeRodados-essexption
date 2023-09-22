@@ -35,11 +35,26 @@ class Dependencia {
 	method capacidadFaltante() = 0.max(cantEmpleados - self.capacidadDeLaFlota())
 	method esGrande() = cantEmpleados >= 40 and rodados.size()>=5
 	
+	
+	
+	method agregarPedido(unPedido) = pedidos.add(unPedido)
+	method quitarPedido(unPedido) = pedidos.remove(unPedido)
+	
+	method totalPasajerosEnLosPedidos() = pedidos.sum({pedido => pedido.pasajeros()})
+	
 	method ningunoSatisface(pedido){
 		return rodados.all({auto => not pedido.puedeSerSatisfechoPor(auto)})
 	}
 	
 	method pedidosInsatisfechos(){
 		return pedidos.filter({ p => self.ningunoSatisface(p)})
+	}
+	
+	method esColorIncompatible(unColor){
+		return pedidos.all({ pedido => pedido.coloresIncompatibles().contains(unColor)})
+	}
+	
+	method relajarTodosLosPedidos(){
+		return pedidos.forEach({ pedido => pedido.relajar()})
 	}
 }

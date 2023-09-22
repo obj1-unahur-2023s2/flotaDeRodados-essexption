@@ -1,0 +1,35 @@
+import pedidos.*
+import rodados.*
+
+describe "Test de Pedidos: Etapa 2" {
+	
+	const pedido1 = new Pedido(distancia = 960, tiempo = 8, pasajeros = 4, coloresIncompatibles = #{"azul","negro"})
+	const cachito = new Corsa(color = "rojo")
+	
+	method initialize(){
+		
+	}
+	
+	test "Cachito puede satisfacer el pedido"{
+		assert.that(pedido1.puedeSerSatisfechoPor(cachito))
+	}
+	test "Agregamos rojo a la lista de colores incompatibles y cachito no satisface el pedido"{
+		pedido1.agregarColorIncompatible("rojo")
+		assert.notThat(pedido1.puedeSerSatisfechoPor(cachito))
+	}
+	test "Cambiamos la cantidad de pasajeros del pedido a 6 y cachito no satisface el pedido"{
+		pedido1.pasajeros(6)
+		assert.notThat(pedido1.puedeSerSatisfechoPor(cachito))
+	}
+	test "Cambiamos el tiempo maximo a 6 horas y nos da una velocidad requerida de 160"{
+		pedido1.acelerar()
+		pedido1.acelerar()
+		assert.equals(160,pedido1.velocidadRequerida())
+	}
+	test "Al cambiar el tiempo maximo a 6 cachito no satisface el pedido"{
+		pedido1.acelerar()
+		pedido1.acelerar()
+		assert.notThat(pedido1.puedeSerSatisfechoPor(cachito))
+	}
+	
+}
